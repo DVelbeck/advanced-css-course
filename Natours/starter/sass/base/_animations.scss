@@ -1,0 +1,71 @@
+
+
+/* Create an animation to move in from left */
+@keyframes moveInLeft {
+
+    /* inital state */
+    0% {
+        opacity: 0;
+        /* make it move on the X axis, left to right */
+        transform: translateX(-10rem);
+    }
+
+
+    /* Create a bouncing effect */
+    80% {
+        transform: translateX(1rem);
+    }
+
+    /* final state */
+    100% {
+        opacity: 1;
+        transform: translateX(0);
+    }
+
+}
+
+/* Create an animation to move in from right */
+@keyframes moveInRight {
+
+    /* inital state */
+    0% {
+        opacity: 0;
+        /* make it move on the X axis, right to left */
+        transform: translateX(10rem);
+    }
+
+    /* Create a bouncing effect */
+    80% {
+        transform: translateX(-1rem);
+    }
+
+    /* final state */
+    100% {
+        opacity: 1;
+        transform: translateX(0);
+    }
+
+}
+
+/* Create an animation to move in from bottom */
+@keyframes moveInBottom {
+
+    /* inital state */
+    0% {
+        opacity: 0;
+        /* make it move on the X axis, right to left */
+        transform: translateY(3rem);
+    }
+
+    /* Create a bouncing effect */
+    80% {
+        transform: translateY(-1rem);
+    }
+
+    /* final state */
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+
+}

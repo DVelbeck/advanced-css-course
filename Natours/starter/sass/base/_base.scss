@@ -1,0 +1,53 @@
+
+
+
+/* Universal selector, as a 'reset'
+   on all elements of the page 
+   on all ::after and ::before pseudo elements
+
+   It is an improvement / best practice
+*/
+*, *::after,*::before {
+    /* reset default browser margin and padding */
+    margin: 0;
+    padding: 0;
+    /* Define that each element of the first element that willhave a box-sizing declaration
+     will inherit whatever next element */
+    box-sizing: inherit;
+}
+
+html{
+    /* Browser default value is 16px
+    to make our life ieasier when using rem unit in child elements,
+    where font-size declarations rely on the roo font-size,
+    defining root font-size to 10px is simpler than using 16px
+    
+    Defines what 1rem is so no need to move it to typography
+    as it is a generic setting
+    */
+    font-size:  62.5%;
+}
+
+body {
+    /* box-sizing: border-box: explanations 
+    
+    if you assign a div as
+    {
+        box-sizing: border-box;
+        width:100px; 
+        height:100px;
+        padding:10px;
+        border:1px solid #000;
+    }
+    then the box will be 100px width and 100px height, include border, 
+    the space you can put things in is 78px height and 78px width.
+    100 (actual width) - 2 (both side border) - 20 (both side padding) = 78
+    
+    if you modify box-sizing to content-box, 
+    then the box will be 122px height and 122px width include border,
+    the space you can put stuff in is 100px height and 100px width.
+    122 (actual width) = 100 (content) + 20 (both side padding) + 2 (both side border)
+    
+    */
+    box-sizing: border-box;
+}

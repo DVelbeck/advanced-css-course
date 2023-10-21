@@ -1,8 +1,290 @@
-/*
-COLORS:
+@charset "UTF-8";
+/* Create an animation to move in from left */
+@keyframes moveInLeft {
+  /* inital state */
+  0% {
+    opacity: 0;
+    /* make it move on the X axis, left to right */
+    transform: translateX(-10rem); }
+  /* Create a bouncing effect */
+  80% {
+    transform: translateX(1rem); }
+  /* final state */
+  100% {
+    opacity: 1;
+    transform: translateX(0); } }
 
-Light green: #7ed56f
-Medium green: #55c57a
-Dark green: #28b485
+/* Create an animation to move in from right */
+@keyframes moveInRight {
+  /* inital state */
+  0% {
+    opacity: 0;
+    /* make it move on the X axis, right to left */
+    transform: translateX(10rem); }
+  /* Create a bouncing effect */
+  80% {
+    transform: translateX(-1rem); }
+  /* final state */
+  100% {
+    opacity: 1;
+    transform: translateX(0); } }
 
+/* Create an animation to move in from bottom */
+@keyframes moveInBottom {
+  /* inital state */
+  0% {
+    opacity: 0;
+    /* make it move on the X axis, right to left */
+    transform: translateY(3rem); }
+  /* Create a bouncing effect */
+  80% {
+    transform: translateY(-1rem); }
+  /* final state */
+  100% {
+    opacity: 1;
+    transform: translateY(0); } }
+
+/* Universal selector, as a 'reset'
+   on all elements of the page 
+   on all ::after and ::before pseudo elements
+
+   It is an improvement / best practice
+*/
+*, *::after, *::before {
+  /* reset default browser margin and padding */
+  margin: 0;
+  padding: 0;
+  /* Define that each element of the first element that willhave a box-sizing declaration
+     will inherit whatever next element */
+  box-sizing: inherit; }
+
+html {
+  /* Browser default value is 16px
+    to make our life ieasier when using rem unit in child elements,
+    where font-size declarations rely on the roo font-size,
+    defining root font-size to 10px is simpler than using 16px
+    
+    Defines what 1rem is so no need to move it to typography
+    as it is a generic setting
+    */
+  font-size: 62.5%; }
+
+body {
+  /* box-sizing: border-box: explanations 
+    
+    if you assign a div as
+    {
+        box-sizing: border-box;
+        width:100px; 
+        height:100px;
+        padding:10px;
+        border:1px solid #000;
+    }
+    then the box will be 100px width and 100px height, include border, 
+    the space you can put things in is 78px height and 78px width.
+    100 (actual width) - 2 (both side border) - 20 (both side padding) = 78
+    
+    if you modify box-sizing to content-box, 
+    then the box will be 122px height and 122px width include border,
+    the space you can put stuff in is 100px height and 100px width.
+    122 (actual width) = 100 (content) + 20 (both side padding) + 2 (both side border)
+    
+    */
+  box-sizing: border-box; }
+
+body {
+  /* Best practice: always anyting related to fonts in body */
+  font-family: "Lato", sans-serif;
+  font-weight: 400;
+  /* font-size: 16px; */
+  /* x1.7 bigger the normal line height */
+  line-height: 1.7;
+  color: #777;
+  padding: 3rem; }
+
+.header-primary {
+  color: #fff;
+  text-transform: uppercase;
+  /* 
+        determines if the back of an element
+        is visible during an animation
+
+        fixes lttle shaking during animation
+     */
+  backface-visibility: hidden;
+  margin-bottom: 6rem; }
+  .header-primary--main {
+    display: block;
+    font-size: 6rem;
+    font-weight: 400;
+    letter-spacing: 3.5rem;
+    animation-name: moveInLeft;
+    animation-duration: 1s;
+    /* function to describe how the animation will progress */
+    animation-timing-function: ease-out;
+    /* animation-iteration-count: 3; */
+    /* animation-delay: 3s; */ }
+  .header-primary--sub {
+    display: block;
+    font-size: 2rem;
+    font-weight: 700;
+    letter-spacing: 1.75rem;
+    animation-name: moveInRight;
+    animation-duration: 1s;
+    /* function to describe how the animation will progress */
+    animation-timing-function: ease-in; }
+
+.btn {
+  /* :link, 
+    :visited ...
+    pseudo class state for special conditions */
+  /* when hovering btn */
+  /* when clicking btn */
+  /* ::after put something behind the element
+    ::after pseudo element is treated like a child of the btn element */ }
+  .btn:link, .btn:visited {
+    text-transform: uppercase;
+    text-decoration: none;
+    padding: 1.5rem 4rem;
+    /* inline-block makes the element not overlap the element above 
+         therefore we can treat the element as a text => text-center in parent*/
+    display: inline-block;
+    border-radius: 10rem;
+    /* Short-end version for quick animation without bothering */
+    transition: all .2s;
+    position: relative;
+    font-size: 1.6rem; }
+  .btn:hover {
+    transform: translateY(-0.3rem);
+    /* show box offset-x | offset-y | blur-radius | color */
+    box-shadow: 0 1rem 2rem rgba(0, 0, 0, 0.5);
+    /* pseudo element ::after only on the :over state */ }
+    .btn:hover::after {
+      /* double the scale of the pseudo element */
+      transform: scaleX(1.4) scaleY(1);
+      opacity: 0;
+      /* !! always define the animation from the parent element, here the :after state */ }
+  .btn:active {
+    transform: translateY(-0.1rem);
+    /* show box offset-x | offset-y | blur-radius | color */
+    box-shadow: 0 1rem 2rem rgba(0, 0, 0, 0.5); }
+  .btn::after {
+    /* to be at the same position of the effects in ::hover */
+    transform: translateY(0); }
+  .btn--white {
+    background-color: #fff;
+    color: #777;
+    /* ::after put something behind the element
+        ::after pseudo element is treated like a child of the btn element */ }
+    .btn--white::after {
+      background-color: #fff; }
+  .btn::after {
+    content: "";
+    /* mandatory so the pseudo element appears */
+    display: inline-block;
+    height: 100%;
+    width: 100%;
+    border-radius: 10rem;
+    /* put the pseudo element behind the parent element */
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: -1;
+    /* enable child elements transitions animations */
+    transition: all .4s; }
+  .btn--animated {
+    /* shortened version animation the element */
+    animation: moveInBottom .5s ease-out .75s;
+    /* for practicality, instead of putting the animation on the parent .btn element
+        * we can specify it here with animation-fill-mode: backwards
+        * which forces the browser to execute the animation first 
+        * before the parent element appears
+        */
+    animation-fill-mode: backwards; }
+
+.row {
+  /*
+     we set our default font-size to 10px
+     we want our row to be 1140px
+
+     using max-width so when the screen is smaller
+     the viewport use the width available
+    */
+  max-width: 114rem;
+  background-color: #eee;
+  /* trick to center inner elements
+    the browser will automatically figure out 
+    the L/R margins
+    */
+  margin: 0 auto; }
+  .row:not(:last-child) {
+    margin-bottom: 8rem; }
+  .row::after {
+    content: "";
+    display: table;
+    clear: both; }
+  .row [class^="col-"] {
+    background-color: orangered;
+    color: #fff;
+    float: left; }
+    .row [class^="col-"]:not(:last-child) {
+      margin-right: 6rem; }
+  .row .col-1-of-2 {
+    width: calc((100% - 6rem) / 2); }
+  .row .col-1-of-3 {
+    width: calc((100% - 2 * 6rem) / 3); }
+  .row .col-2-of-3 {
+    width: calc( 2 * ((100% - 2 * 6rem) / 3) + 6rem); }
+  .row .col-1-of-4 {
+    width: calc((100% - 3 * 6rem) / 4); }
+  .row .col-2-of-4 {
+    width: calc(2 * ((100% - 3 * 6rem) / 4) + 6rem); }
+  .row .col-3-of-4 {
+    width: calc(3 * ((100% - 3 * 6rem) / 4) + 2 * 6rem); }
+
+.header {
+  /* 95% of the viewport height */
+  height: 95vh;
+  /* property values precedences are from left (1st) to right (last)
+        * linear-gradient will be then on top of image
+         */
+  background-image: linear-gradient(to right bottom, rgba(126, 213, 111, 0.8), rgba(40, 180, 133, 0.8)), url(../img/hero-small.jpg);
+  /* AMAZING: fit the viewport view removing image repetition */
+  background-size: cover;
+  background-position: top;
+  position: relative;
+  /* Handle the display of elegant white cut in the header image 
+            by moving the points locations of the header box corners
+            takes coordinates: 
+            1st -> top left: x y, 
+            2nd -> top right: x y,
+            3rd -> bottom right: x y,
+            4th -> bottm left x y 
+        */
+  clip-path: polygon(0 0, 100% 0, 100% 75%, 0 100%); }
+  .header__logo-box {
+    position: absolute;
+    top: 4rem;
+    left: 4rem; }
+  .header__logo {
+    height: 3.5rem; }
+  .header__text-box {
+    position: absolute;
+    /* left and top related to the parent element */
+    left: 50%;
+    top: 40%;
+    /* related to element itself
+            
+                translate on x and y
+                -50% are relation to the element 
+                but not to the parent
+                shift -50% to the top
+                shift -50% to the left
+            */
+    transform: translate(-50%, -50%);
+    text-align: center; }
+
+/* BEM class naming convention 
+    Blocks – Elements – Modifiers
+    https://getbem.com/introduction/
 */

@@ -1,0 +1,54 @@
+body {
+    /* Best practice: always anyting related to fonts in body */
+    font-family: "Lato", sans-serif;
+    font-weight: 400;
+    /* font-size: 16px; */
+    /* x1.7 bigger the normal line height */
+    line-height: 1.7;
+    color: $colour-grey-dark;
+    padding: 3rem;
+}
+
+.header-primary {
+    color: $colour-white;
+    text-transform: uppercase;
+
+    /* 
+        determines if the back of an element
+        is visible during an animation
+
+        fixes lttle shaking during animation
+     */
+    backface-visibility: hidden;
+
+    margin-bottom: 6rem;
+
+    &--main {
+        display: block;
+        font-size: 6rem;
+        font-weight: 400;
+        letter-spacing: 3.5rem;
+
+        animation-name: moveInLeft;
+        animation-duration: 1s;
+        /* function to describe how the animation will progress */
+        animation-timing-function: ease-out;
+
+
+        /* animation-iteration-count: 3; */
+        /* animation-delay: 3s; */
+    }
+
+    &--sub {
+        display: block;
+        font-size: 2rem;
+        font-weight: 700;
+        letter-spacing: 1.75rem;
+
+
+        animation-name: moveInRight;
+        animation-duration: 1s;
+        /* function to describe how the animation will progress */
+        animation-timing-function: ease-in;
+    }
+}
