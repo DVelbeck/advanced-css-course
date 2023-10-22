@@ -1,0 +1,32 @@
+.main-background-gradient {
+    background-image: linear-gradient(to right,
+    rgba($colour-primary-light, 0.8),
+    rgba($colour-primary-dark, 0.8))
+}
+
+.icon-big{
+    font-size: 8rem;
+}
+.icon-medium{
+    font-size: 4rem;
+}
+.icon-small{
+    font-size: 2rem;
+}
+
+
+.u-center-text{
+    text-align: center;
+}
+
+.u-margin-bottom-big{
+    margin-bottom: 8rem;
+}
+
+.u-margin-bottom-medium{
+    margin-bottom: 4rem;
+}
+
+.u-margin-bottom-small{
+    margin-bottom: 1.5rem;
+}

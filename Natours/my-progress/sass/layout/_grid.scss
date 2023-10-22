@@ -8,7 +8,7 @@
     */
     max-width: $grid-width;
 
-    background-color: #eee;
+    // background-color: #eee;
 
     /* trick to center inner elements
     the browser will automatically figure out 
@@ -29,8 +29,8 @@
     // starting (^) with 'col-'
     // and not contain (*) nor end ($)
     [class^="col-"]{
-        background-color: orangered;
-        color: $colour-white;
+        // background-color: orangered;
+        // color: $colour-white;
         
         // make the col float 
         // so they are rendered / move based on the grid

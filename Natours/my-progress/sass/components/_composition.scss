@@ -1,0 +1,45 @@
+.composition {
+    position: relative;
+
+    &__photo {
+        width: 55%; // always define images width in % for responsiveness
+        box-shadow: 0 1.5rem 4rem rgba($colour-black, .4);
+        position: absolute;
+        z-index: 10;
+        transition: all .2s;
+
+        // Add a space between the border 
+        // and the element that has the border
+        // here it is the images hover below
+        outline-offset: 2rem;
+
+        &--p1 {
+            left: 0;
+            top: -2rem; // move upwards
+        }
+
+        &--p2 {
+            right: 0;
+            top: 2rem; // move upwards
+        }
+
+        &--p3 {
+            left: 20%;
+            top: 10rem; // move upwards
+        }
+
+        &:hover {
+            // create a border around image 
+            outline: 1.5rem solid $colour-primary;
+
+            transform: scale(1.05); // make image bigger on hover
+            box-shadow: 0 2.5rem 4rem rgba($colour-black, .5);
+            z-index: 20;
+        }
+    }
+
+    // make ALL images NOT hovered smaller
+    &:hover &__photo:not(:hover) {
+        transform: scale(.9);
+    }
+}

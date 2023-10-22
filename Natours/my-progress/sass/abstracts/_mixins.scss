@@ -9,6 +9,20 @@
 
 }
 
+@mixin elementGradient{
+
+    @include mainBackgroundGradient;
+    -webkit-background-clip: text;
+    color: transparent;
+}
+
+@mixin mainBackgroundGradient {
+    background-image: linear-gradient(to right,
+    rgba($colour-primary-light, 0.8),
+    rgba($colour-primary-dark, 0.8))
+}
+
+
 // @mixin calculateWidth($colSpan, $nbColumns) {
 //     /* 
 //     1 - use #{} around SASS variables so it gets compiled
