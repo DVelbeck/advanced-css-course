@@ -1,0 +1,220 @@
+.card {
+    // FUNCTIONALITY
+
+    // to make the child element stick out of the parent
+    perspective: 150rem;
+    -moz-perspective: 150rem;
+
+    position: relative;
+    height: 52rem;
+
+    &__side {
+        height: 52rem;
+
+        // DON'T forget the s for the actual duration unit!!!!
+        // use `ease` to make animation smoother
+        transition: all .8s ease;
+        position: absolute;
+        top:0;
+        left:0;
+
+        /* fix the collapsing of the block due to position: absolute*/
+        width: 100%;
+        backface-visibility: hidden;
+        /**/
+
+        border-radius: 3px;
+        box-shadow: 0 1.5rem 4rem rgba($colour-black, .15);
+
+        // Avoid the picture overflow parent
+        overflow: hidden;
+
+        &--front {
+                background-color: $colour-white;
+            }
+        
+            &--back {
+                // make the card rotate on the vertical axis
+                // on 180 degrees at start
+                transform: rotateY(180deg);
+        
+                &-1 {
+                    @include imageGradient(
+                        $colour-secondary-light, 
+                        $colour-secondary-dark,
+                    );
+                }
+                &-2 {
+                    @include imageGradient(
+                        $colour-primary-light, 
+                        $colour-primary-dark
+                    );
+                }
+                &-3 {
+                    @include imageGradient(
+                        $colour-tertiary-light, 
+                        $colour-tertiary-dark,
+                    );
+                }
+            }
+    }
+
+    &:hover &__side--front{
+        // make the card rotate on the vertical axis
+        // on 180 degrees
+        transform: rotateY(-180deg);
+        z-index: 0;
+    }
+    &:hover &__side--back{
+        // make the card rotate on the vertical axis
+        // back to 0 degree 
+        // because already flipped on 180 degrees
+        transform: rotateY(0);
+        z-index: 1;
+    }
+
+    // FRONT SIDE STYLING
+    &__picture{
+        background-size: cover;
+        height: 23rem;
+
+        // New CSS property not compatible with IE, Edge
+        background-blend-mode: screen;
+
+        -webkit-clip-path: polygon(0 0, 100% 0, 100% 85%, 0 100%);
+        clip-path: polygon(0 0, 100% 0, 100% 85%, 0 100%);
+
+        // fix the radius corners broken due to clip-path 
+        // that overides the overflow from &__side 
+        border-top-left-radius: 3px;
+        border-top-right-radius: 3px;
+
+        &--1{
+            @include imageGradientWithURL(
+                $colour-secondary-light, 
+                $colour-secondary-dark,
+                1,
+                '../img/nat-5.jpg'
+            );
+        }
+
+        &--2{
+            @include imageGradientWithURL(
+                $colour-primary-light, 
+                $colour-primary-dark,
+                1,
+                '../img/nat-6.jpg'
+            );
+        }
+
+        &--3{
+            @include imageGradientWithURL(
+                $colour-tertiary-light, 
+                $colour-tertiary-dark,
+                1,
+                '../img/nat-7.jpg'
+            );
+        }
+    }
+
+    &__header{
+        font-size: 2.8rem;
+        font-weight: 300;
+        text-transform: uppercase;
+        text-align: right;
+        color: $colour-white;
+
+        position: absolute;
+        top: 12rem;
+        right: 2rem;
+
+        // make the header narrower
+        width: 75%;
+    }
+
+    &__header-span{
+        // force the span to be broke down into 2 lines
+        padding: 1rem 1.5rem;
+
+        // apply all css declarations in the selector (here __header-span)
+        // to all boxes (here the broke span in 2 pieces)
+        -webkit-box-decoration-break: clone;
+        box-decoration-break: clone;
+
+        &--1{
+            @include imageGradient(
+                $colour-secondary-light, 
+                $colour-secondary-dark,
+                .85
+            );
+        }
+
+        &--2{
+            @include imageGradient(
+                $colour-primary-light, 
+                $colour-primary-dark,
+                .85
+            );
+        }
+
+        &--3{
+            @include imageGradient(
+                $colour-tertiary-light, 
+                $colour-tertiary-dark,
+                .85
+            );
+        }
+    }
+
+    &__details{
+        // make the chhild elements a bit more centered
+        padding: 3rem;
+
+        ul{
+            list-style: none;
+            width: 80%;
+            
+            // center the li's
+            margin: 0 auto;
+
+            li{
+
+                text-align: center;
+                font-size: 1.5rem;
+                padding: 1rem;
+                
+                &:not(:last-child){
+                    border-bottom: 1px solid $colour-grey-light-2;
+                }
+            }
+        }
+    }
+
+    // BACK SIDE STYLING
+    &__cta{
+        position: absolute;
+        top:50%;
+        left:50%;
+        transform: translate(-50%, -50%);
+        // fix button being squeezed, so text is now on 1 line
+        width: 90%;
+        // make all child elements centered
+        text-align: center;
+    }
+
+    &__price-box{
+        text-align: center;
+        color: $colour-white;
+        margin-bottom: 8rem;
+    }
+
+    &__price-only{
+        font-size: 1.4rem;
+        text-transform: uppercase;
+
+    }
+    &__price-value{
+        font-size: 6rem;
+        font-weight: 100;
+    }
+}

@@ -61,6 +61,17 @@
         }
     }
 
+    &--green {
+        background-color: $colour-primary;
+        color: $colour-white;
+
+        /* ::after put something behind the element
+        ::after pseudo element is treated like a child of the btn element */
+        &::after {
+            background-color: $colour-primary;
+        }
+    }
+
     /* ::after put something behind the element
     ::after pseudo element is treated like a child of the btn element */
     &::after {

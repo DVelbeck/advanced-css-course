@@ -1,3 +1,7 @@
+// @mixin box_shadow($blur-radius){
+//     box-shadow: .2rem .15rem $blur-radius rgba($color-black, .2);
+// }
+
 @mixin clearfix {
     // avoid the row to collapse because of the floating cols
     &::after{
@@ -10,16 +14,34 @@
 }
 
 @mixin elementGradient{
-
     @include mainBackgroundGradient;
     -webkit-background-clip: text;
     color: transparent;
 }
 
 @mixin mainBackgroundGradient {
-    background-image: linear-gradient(to right,
-    rgba($colour-primary-light, 0.8),
-    rgba($colour-primary-dark, 0.8))
+    @include imageGradient(
+        $colour-primary-light, 
+        $colour-primary-dark,
+        0.8,
+        to right
+    );
+}
+
+@mixin imageGradient($startColour, $endColour, $opacity:1, $direction: to right bottom) {
+    background-image: linear-gradient(
+        $direction,
+        rgba($startColour, $opacity),
+        rgba($endColour, $opacity)
+    );
+}
+
+@mixin imageGradientWithURL($startColour, $endColour, $opacity:1, $url: '', $direction: to right bottom) {
+    background-image: linear-gradient(
+        $direction,
+        rgba($startColour, $opacity),
+        rgba($endColour, $opacity),
+    ), url($url);
 }
 
 
