@@ -3,15 +3,20 @@
     font-size: 1.5rem;
     padding: 2.5rem;
     text-align: center;
-    border-radius: 3;
-    box-shadow: 0 1.5rem 4rem rgba($colour-black, .15);
+    border-radius: $base-border-radius;
+    @include long_box_shadow();
+    
+    transition: transform .3s;
 
     /* Short-end version for quick animation without bothering */
     transition: transform .4s;
 
     &__icon {
+        font-size: 6rem;
         margin-bottom: .5rem;
         display: inline-block;
+        -webkit-background-clip: text;
+        color: transparent;
         @include elementGradient;
     }
 
@@ -20,9 +25,4 @@
         // transform: scale(1.03);
         transform: translateY(-1.5rem)  scale(1.03);
     }
-    // &:active{
-    //     box-shadow: 0 .5rem 1rem rgba($colour-black, .15);
-    //     transform: translateY(0);
-    // }
-
 }

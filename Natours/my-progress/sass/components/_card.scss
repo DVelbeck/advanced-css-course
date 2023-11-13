@@ -23,8 +23,8 @@
         backface-visibility: hidden;
         /**/
 
-        border-radius: 3px;
-        box-shadow: 0 1.5rem 4rem rgba($colour-black, .15);
+        border-radius: $base-border-radius;
+        @include long_box_shadow();
 
         // Avoid the picture overflow parent
         overflow: hidden;
@@ -192,10 +192,8 @@
 
     // BACK SIDE STYLING
     &__cta{
-        position: absolute;
-        top:50%;
-        left:50%;
-        transform: translate(-50%, -50%);
+        @include center_horizontally();
+        
         // fix button being squeezed, so text is now on 1 line
         width: 90%;
         // make all child elements centered

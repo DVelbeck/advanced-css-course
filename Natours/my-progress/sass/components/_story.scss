@@ -1,0 +1,102 @@
+.story{
+    width: 75%;
+    // center it
+    margin: 0 auto;
+    // TODO: make boxshadow mixin
+    @include box_shadow(0, 3rem, 5rem, $colour-black, .1);
+    background-color: rgba($colour-white, .6);
+    border-radius: $base-border-radius;
+    padding: 6rem;
+    padding-left: 9rem; // add more padding to image shape
+    font-size: $default-font-size;
+
+    // Make the story box tilted/skewed
+    transform: skewX(-12deg);
+
+    // Unskew all child elements
+    // ==> skewX(12deg) is repeated because of CSS limitation
+    // where parent .story class has transform then takes precedence
+    // we have to repeat it to unskew
+    & > * {
+        transform: skewX(12deg);
+    }
+
+    &__shape{
+        // force the text besides to be next to it
+        width: 15rem;
+        height: 15rem;
+        float: left;
+        position: relative;
+        overflow: hidden;
+
+        // Make the content that is around to flow around as a circle
+        // radius at center x and y of the shape 
+        -webkit-shape-outside: circle(50% at 50% 50%);
+        shape-outside: circle(50% at 50% 50%);
+
+        // modify the shape to be like a circle
+        -webkit-clip-path:circle(50% at 50% 50%);
+        clip-path: circle(50% at 50% 50%);
+
+        // move the text to the right
+        // it is better to use transform than margin due to float
+        // ==> skewX(12deg) is repeated because of CSS limitation
+        // where parent .story class has transform then takes precedence
+        // we have to repeat it to unskew
+        transform: translateX(-3rem) skewX(12deg);
+    }
+
+    &__img {
+        height: 100%;
+        transform: translateX(-4rem) scale(1.4);
+
+        // fix small shaking glitch when transformed
+        backface-visibility: hidden;
+
+        // activate transitions
+        transition: all .5s;
+    }
+
+    &__text{
+        // ==> skewX(12deg) is repeated because of CSS limitation
+        // where parent .story class has transform then takes precedence
+        // we have to repeat it to unskew
+        transform: skewX(12deg);
+    }
+
+    &__caption{
+        // the caption is normally hidden du to the image
+        // use all these properties to make text on top of image:
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        //----------/ 
+        color: $colour-white;
+        text-transform: uppercase;
+        font-size: 1.7rem;
+        text-align: center;
+
+        // make the text invisible before the hover
+        opacity: 0;
+
+        // activate transitions
+        transition: all .5s;
+
+
+        transform: translate(-50%, 20%);
+        // fix small shaking glitch when transformed
+        backface-visibility: hidden;
+    }
+
+    &:hover &__caption{
+        // make the text move up
+        opacity: 1;
+        transform: translate(-50%, -50%);
+    }
+    &:hover &__image{
+        // zoom out image on hover
+        transform: translateX(-4rem) scale(1);
+        // blur image, make it darker
+        filter: blur(3px) brightness(80%);
+    }
+}

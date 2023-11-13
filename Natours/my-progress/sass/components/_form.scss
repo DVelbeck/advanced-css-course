@@ -1,0 +1,128 @@
+.form{
+    &__group {
+        margin-bottom: 2rem;
+    }
+
+    &__input {
+        font-size: 1.5rem;
+        // inherit the website's font-family to force 
+        // the browser not to use its ugly default form font
+        font-family: inherit;
+        padding: 1.5rem 2rem;
+        border-radius: 2px;
+        background-color: rgba($colour-white, .5);
+        border: none;
+
+        // because when we click the input it moves the input in the UI
+        // add a transparent border bottom so the input doesn't move on click
+        border-bottom: 3px solid transparent;
+
+        width: 90%;
+        display: block;
+
+        // add smoother animation
+        transition: all .3s;
+
+        // Only works for Chrome based browser
+        &::-webkit-input-placeholder{
+            // change the colour of the placeholder font color
+            color: $colour-grey-dark-2;
+        }
+
+        &:focus{
+            //  remove browser outline when selecting the input
+            outline: none;
+
+            // never deactivate outline with non without
+            // replacing with a better UI as below
+            @include base_box_shadow(.2);
+            border-bottom: 3px solid $colour_primary;
+        }
+
+        &:focus:invalid{
+            // When required input is invalid and is selected
+            border-bottom: 3px solid $colour-secondary-dark;
+        }
+    }
+
+    &__label {
+        font-size: 1.2rem;
+        font-weight: 700;
+        // make the label in line with the input placeholder text //
+        margin-left: 2rem;
+        margin-top: .7rem;
+        //----///
+        display: block;
+        transition: all .3s;
+        transform: translateY(0);
+    }
+
+    // Apply a style when the input's placeholder is shown
+    // and select 1st adjacent sibling (+)
+    // if label was after several sibling, we would have used ~
+    &__input:placeholder-shown + &__label {
+        // hide the label
+        opacity: 0;
+        visibility: hidden;
+        transform: translateY(-4rem);
+    }
+
+    &__radio-group{
+        width: 49%; // make the radio sit side by side
+        display: inline-block;
+    }
+
+    &__radio-input {
+        display: none;
+    }
+
+    &__radio-label {
+        font-size: $default-font-size;
+        cursor: pointer;
+        position: relative;
+        padding-left: 4.5rem;
+    }
+
+    &__radio-button {
+        height: 3rem;
+        width: 3rem;
+        border: 5px solid $colour_primary;
+        border-radius: 50%; // make it round
+        
+        // don't forget display block or inline block so the properties above work
+        display: inline-block;
+
+        position: absolute;
+        left:0;
+        top: -.4rem;
+
+        // display inner element
+        &::after{
+            content: "";
+            display: block;
+            height: 1.3rem;
+            width: 1.3rem;
+            border-radius: 50%; // make the inner element as a circle
+
+            // parent should have a position defined
+            // as it is alreay defined, it doesn't have to be relative, it iwll work with absolute
+            position: absolute;
+
+            // make the inner element align with the label
+            top: 50%;
+            left: 50%;
+            transform: translate( -50%, -50%);
+
+            // instead of border, here is background
+            background-color: $colour_primary;
+            opacity: 0;
+            transition: opacity .2s;
+        }
+    }
+    // As soon we hit the radio button element, it gets checked
+    // so we use the sibling radio input, here the label, 
+    // then select the child button to display the inner element
+    &__radio-input:checked ~ &__radio-label &__radio-button:after{
+        opacity: 1;
+    }
+}

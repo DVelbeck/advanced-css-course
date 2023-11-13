@@ -1,6 +1,28 @@
-// @mixin box_shadow($blur-radius){
-//     box-shadow: .2rem .15rem $blur-radius rgba($color-black, .2);
-// }
+@mixin box_shadow(
+    $x-direction: .2rem, 
+    $y-direction: .15rem, 
+    $blur-radius: .2rem,
+    $colour: '#fff',
+    $opacity: .2,
+){
+    /* show shadow box offset-x | offset-y | blur-radius | color */
+    box-shadow: $x-direction $y-direction $blur-radius rgba($colour, $opacity);
+}
+
+@mixin base_box_shadow($opacity: .5){
+    @include box_shadow(0, 1rem, 2rem, $colour-black, $opacity);
+}
+
+@mixin center_horizontally(){
+    position: absolute;
+    top:50%;
+    left:50%;
+    transform: translate(-50%, -50%);
+}
+
+@mixin long_box_shadow($opacity: .15){
+    @include box_shadow(0, 1.5rem, 4rem, $colour-black, $opacity);
+}
 
 @mixin clearfix {
     // avoid the row to collapse because of the floating cols
@@ -10,7 +32,6 @@
         // clear any used float: left or float: right
         clear: both;
     }
-
 }
 
 @mixin elementGradient{

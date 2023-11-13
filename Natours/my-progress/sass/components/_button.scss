@@ -1,9 +1,12 @@
 // Button is reusable so it is a component
 .btn {
-
+    &, // to make this available to all elements with .btn class like <button>
     /* :link, 
     :visited ...
-    pseudo class state for special conditions */
+    pseudo class state for special conditions
+    only apply if element has these pseudo classes (like anchor)!!!
+    NOT BUTTON!!!!
+    */
     &:link,
     &:visited {
         text-transform: uppercase;
@@ -18,14 +21,17 @@
         transition: all .2s;
         position: relative;
         font-size: $default-font-size;
+
+        // Change for the <button> element
+        border: none;
+        cursor: pointer;
     }
 
     /* when hovering btn */
     &:hover {
         transform: translateY(-.3rem);
-        /* show box offset-x | offset-y | blur-radius | color */
-        box-shadow: 0 1rem 2rem rgba($colour-black, .5);
-
+        @include base_box_shadow();
+        
         /* pseudo element ::after only on the :over state */
         &::after {
             /* double the scale of the pseudo element */
@@ -36,11 +42,12 @@
         }
     }
 
-    /* when clicking btn */
-    &:active {
+    /* when clicking btn (anchor) or on focus (button) */
+    &:active,
+    &:focus {
         transform: translateY(-.1rem);
         /* show box offset-x | offset-y | blur-radius | color */
-        box-shadow: 0 1rem 2rem rgba($colour-black, .5);
+        @include base_box_shadow();
     }
 
     // Do not move, executes before btn --white
@@ -52,7 +59,7 @@
 
     &--white {
         background-color: $colour-white;
-        color: $colour-grey-dark;
+        color: $colour-grey-dark-1;
 
         /* ::after put something behind the element
         ::after pseudo element is treated like a child of the btn element */
@@ -136,11 +143,11 @@
     &:hover{
         background-color: $colour-primary;
         color: $colour-white;
-        box-shadow: 0 1rem 2rem rgba($colour-black, .15);
+        @include base_box_shadow(.15);
         transform: translateY(-2px);
     }
     &:active{
-        box-shadow: 0 .5rem 1rem rgba($colour-black, .15);
+        @include base_box_shadow(.15);
         transform: translateY(0);
     }
 }

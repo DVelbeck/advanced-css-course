@@ -3,7 +3,7 @@
 
     &__photo {
         width: 55%; // always define images width in % for responsiveness
-        box-shadow: 0 1.5rem 4rem rgba($colour-black, .4);
+        @include long_box_shadow(.4);
         position: absolute;
         z-index: 10;
         transition: all .2s;
@@ -33,7 +33,7 @@
             outline: 1.5rem solid $colour-primary;
 
             transform: scale(1.05); // make image bigger on hover
-            box-shadow: 0 2.5rem 4rem rgba($colour-black, .5);
+            @include box_shadow(0, 2.5rem, 4rem, $colour-black, .5);
             z-index: 20;
         }
     }

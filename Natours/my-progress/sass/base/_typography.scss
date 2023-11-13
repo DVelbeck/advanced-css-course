@@ -5,7 +5,7 @@ body {
     /* font-size: 16px; */
     /* x1.7 bigger the normal line height */
     line-height: 1.7;
-    color: $colour-grey-dark;
+    color: $colour-grey-dark-1;
     padding: 3rem;
 }
 
@@ -53,19 +53,23 @@ body {
     }
 }
 
-.header-secondary{
+.header-secondary {
     font-size: 3.5rem;
     text-transform: uppercase;
     font-weight: 700;
     display: inline-block;
+    -webkit-background-clip: text; 
+    color: transparent;
+    letter-spacing: .2rem;
+    transition: all .2s;
 
     /* These 3 CSS declarations below are later replace by elementGradient mixin */
 
     // background-image: linear-gradient(to right, $colour-primary-light, $colour-primary-dark);
-   
+
     // clip the colour gradient where the text is
     // -webkit-background-clip: text;
-   
+
     // make the text take the gradient colour with transparent
     // color: transparent;
 
@@ -76,22 +80,26 @@ body {
 
     transition: all .2s;
 
-    &:hover{
+    &:hover {
         // transform with skew effect 2 degrees on Y
-        transform: skewY(2deg);
+        transform: skewY(2deg) skewX(15deg) scale(1.1);
+        
+        /* offset-x | offset-y | blur-radius | color */
+        text-shadow: .5rem 1rem 2rem rgba($colour-black, .2);
     }
 }
 
-.header-tertiary{
+.header-tertiary {
     font-size: $default-font-size;
     font-weight: 700;
     text-transform: uppercase;
 }
 
-.paragraph{
+.paragraph {
     font-size: $default-font-size;
+
     // select all except last child
-    &:not(:last-child){
+    &:not(:last-child) {
         margin-bottom: 3rem;
     }
 }

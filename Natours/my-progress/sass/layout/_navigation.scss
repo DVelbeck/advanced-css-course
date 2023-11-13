@@ -1,0 +1,162 @@
+.navigation{
+
+    &__checkbox{
+        display: none;
+    }
+
+    &__button{
+        background-color: $colour-white;
+        height: 7rem;
+        width: 7rem;
+        position: fixed;
+        top: 6rem;
+        right: 6rem;
+        border-radius: 50%;
+        z-index: 2000;
+        cursor: pointer;
+        
+        @include base_box_shadow(.1);
+        text-align: center;
+    }
+
+    &__background{
+        height: 6rem;
+        width: 6rem;
+        border-radius: 50%;
+        // same as absolute but doesn't move when scrolling
+        position: fixed;
+        top: 6.5rem;
+        right: 6.5rem;
+        background-image: radial-gradient($colour-primary-light, $colour-primary-dark);
+        z-index: 1000;
+
+        // have the appearing of the background 
+        // with a custom effect (cubic-bezier)
+        // check https://cubic-bezier.com for effects
+        transition: transform .8s cubic-bezier(0.86, 0, 0.07, 1);
+    }
+
+    &__nav{
+        height: 100vh;
+        position: fixed;
+        top: 0;
+        right: 0;
+        z-index: 1500;
+        opacity: 0;
+        
+        opacity: 0;
+        width: 0; 
+        // to make the text gone as opacity is 0
+        // have the appearing of the navigation 
+        // with a custom effect (cubic-bezier)
+        // check https://cubic-bezier.com for effects
+        transition: all 1s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+    }
+
+    &__list{
+        @include center_horizontally();
+        list-style: none;
+        text-align: center;
+        width: 100%;
+    }
+
+    &__item{
+
+    }
+
+    &__link{
+        &:link,
+        &:visited{
+            background-image: linear-gradient(120deg, transparent 0%, transparent 50%,  $colour-white 50%);
+            background-size: 225%;
+            color: $colour-white;
+            // to get the padding to wrok, display should be inline-block
+            display: inline-block;
+            font-size: 3rem;
+            font-weight: 300;
+            padding: 1rem 2rem;
+            text-decoration: none;
+            text-transform: uppercase;
+            transition: all .4s;
+        }
+
+        &:hover,
+        &:active{
+            background-position: 100%;
+            // background-image: linear-gradient(120deg, orangered 0%, orangered 50%,  transparent 50%);
+            color: $colour-primary;
+            transform: translateX(1rem);
+        }
+    }
+    
+    // FUNCTIONALITY
+
+
+    // As soon we hit the radio button element, it gets checked
+    // so we use the sibling radio input, here the label, 
+    // then select the child button to display the inner element
+    &__checkbox:checked ~ &__background {
+        opacity: 1;
+        transform: scale(80);
+    }
+
+    &__checkbox:checked ~ &__nav {
+        opacity: 1;
+        width: 100%;
+    }
+
+    // ICON
+    &__icon{
+        position: relative;
+        margin-top: 3.5rem;
+
+        &,
+        &::before,
+        &::after{
+            width: 3rem;
+            height: 2px;
+            background-color: $colour-grey-dark-3;
+            display: inline-block;
+            transition: all .2s;
+        }
+
+        &::before,
+        &::after{
+            // for pseudo elements to appear
+            // add content property
+            content: "";
+
+            display: inline-block;
+            position: absolute;
+            left: 0;
+        }
+
+        &::before{ top: -.8rem; }
+        &::after{ top: .8rem; }
+    }
+
+    // Make the button menu lines move
+    &__button:hover &__icon:before{
+        top: -1rem;
+    }
+    &__button:hover &__icon:after{
+        top: 1rem;
+    }
+    // when the checkbox is selected, 
+    // we select the button (its sibling)
+    //  and the button's child => the icon
+    &__checkbox:checked + &__button &__icon {
+        // make the hamburger middlebar is made invisible
+        background-color: transparent;
+    }
+    &__checkbox:checked + &__button &__icon::before {
+        // make the hamburger middlebar is made invisible
+       transform: rotate(135deg);
+       top:0;
+    }
+    &__checkbox:checked + &__button &__icon::after {
+        // make the hamburger middlebar is made invisible
+       transform: rotate(-135deg);
+       top:0;
+    }
+}
