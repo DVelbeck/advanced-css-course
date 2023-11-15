@@ -7,6 +7,12 @@
      the viewport use the width available
     */
     max-width: $grid-width;
+    @include respond(tab-port){
+        max-width: 50rem;
+
+        // padding on sides for tab-port
+        padding: 0 3rem;
+    }
 
     // background-color: #eee;
 
@@ -19,6 +25,10 @@
     // apply margin bottom to all children except the last
     &:not(:last-child) {
         margin-bottom: $gutter-vertical;
+
+        @include respond(tab-port){
+            margin-bottom: $gutter-vertical-small;
+        }
     }
 
     // use clearfix to make sure the row has the complete height
@@ -38,6 +48,18 @@
         
         &:not(:last-child) {
             margin-right: $gutter-horizontal;
+
+
+            @include respond(tab-port){
+                margin-right: 0;
+                margin-bottom: $gutter-vertical-small;
+            }
+        }
+
+        @include respond(tab-port){
+            // make sure the following column css class 
+            // get overwritten when screen is small
+            width: 100% !important;
         }
     }
 

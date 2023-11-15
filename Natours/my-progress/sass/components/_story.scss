@@ -2,7 +2,6 @@
     width: 75%;
     // center it
     margin: 0 auto;
-    // TODO: make boxshadow mixin
     @include box_shadow(0, 3rem, 5rem, $colour-black, .1);
     background-color: rgba($colour-white, .6);
     border-radius: $base-border-radius;
@@ -46,7 +45,7 @@
         transform: translateX(-3rem) skewX(12deg);
     }
 
-    &__img {
+    &__image {
         height: 100%;
         transform: translateX(-4rem) scale(1.4);
 

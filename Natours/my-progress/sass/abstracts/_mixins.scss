@@ -65,21 +65,52 @@
     ), url($url);
 }
 
+// MEDIA QUERY MANAGER
+/*
+0 - 600px => phone
+600 - 900px => table portrait
+900 - 1200px => table landcape
+[1200 - 1800px] + => normal styles apply because it is a desktop first app
+1800px - + => big desktop
 
-// @mixin calculateWidth($colSpan, $nbColumns) {
-//     /* 
-//     1 - use #{} around SASS variables so it gets compiled
-//     2 - $colSpan spreading size of the column
-//     3 - $nb of columns included in row grid
-//     */ 
+$breakpoint:
+- phone
+- tab-port
+- tab-land
+- big-desktop
 
-//     // Get size of all gutters
-//     // -1 is because we don't want a gutter after last column
-//     $totalGuttersWidth: calc(#{$nbColumns} - 1) * #{$gutter-horizontal};
+ORDER: Base + typography -> general layout + grid -> page layout -> components 
 
-//     // initial column width
-//     $initColumnWidth: calc((100% - #{$totalGuttersWidth}) / #{$nbColumns});
-
-//     // eventually return the actual column width
-//     width: calc((#{$colSpan} * $initColumnWidth) + ();
-// }
+1em = 16px;
+*/
+@mixin respond($breakpoint){
+    @if $breakpoint == phone {
+        // 600px / 16 = 37.5em
+        @media(max-width: 37.5em){
+            // content directive to get the content passed into the mixin
+            @content
+        };
+    }
+    @if $breakpoint == tab-port {
+        // 900px / 16 = 56.25em
+        @media(max-width: 56.25em){
+            // content directive to get the content passed into the mixin
+            @content
+        };
+    }
+    @if $breakpoint == tab-land {
+        // 1200px / 16 = 75em
+        @media(max-width: 75em){
+            // content directive to get the content passed into the mixin
+            @content
+        };
+    }
+    @if $breakpoint == big-desktop {
+        // 1800px / 16 = 112.5em
+        @media(min-width: 112.5em){
+            // content directive to get the content passed into the mixin
+            @content
+        };
+    }
+    
+}

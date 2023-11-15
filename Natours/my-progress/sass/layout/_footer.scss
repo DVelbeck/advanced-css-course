@@ -2,16 +2,23 @@
     background-color: $colour-grey-dark-3;
     padding: 10rem 0;
     font-size: 1.4rem;
+    
+    @include respond(tab-port){
+        padding: 8rem 0;
+    }
 
     &__logo-box {
         text-align: center;
         margin-bottom: 8rem;
+
+        @include respond(tab-port){
+            margin-bottom: 6rem;
+        }
     }
 
     &__logo {
         width: 15rem;
         height: auto;
-
     }
 
     &__navigation {
@@ -20,6 +27,11 @@
         // inline-block makes the block the width based on its content
         // the border top will adjust then to the child elements width
         display: inline-block;
+
+        @include respond(tab-port){
+            width: 100%;
+            text-align: center;
+        }
     }
 
     &__list {
@@ -63,5 +75,10 @@
         // the used space makes the ui even
         width: 80%; 
         float:right;
+
+        @include respond(tab-port){
+            width: 100%;
+            float: none;
+        }
     }
 }

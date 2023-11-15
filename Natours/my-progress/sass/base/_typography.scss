@@ -6,7 +6,6 @@ body {
     /* x1.7 bigger the normal line height */
     line-height: 1.7;
     color: $colour-grey-dark-1;
-    padding: 3rem;
 }
 
 .header-primary {
@@ -37,6 +36,11 @@ body {
 
         /* animation-iteration-count: 3; */
         /* animation-delay: 3s; */
+
+        @include respond(phone){
+            letter-spacing: 1rem;
+            font-size: 5rem;
+        }
     }
 
     &--sub {
@@ -50,6 +54,12 @@ body {
         animation-duration: 1s;
         /* function to describe how the animation will progress */
         animation-timing-function: ease-in;
+
+
+        @include respond(phone){
+            letter-spacing: .5rem;
+            font-size: 5rem;
+        }
     }
 }
 
@@ -79,6 +89,14 @@ body {
     letter-spacing: .2rem;
 
     transition: all .2s;
+
+    @include respond(tab-port){
+        font-size: 3rem;
+    }
+    
+    @include respond(phone){
+        font-size: 2.5rem;
+    }
 
     &:hover {
         // transform with skew effect 2 degrees on Y

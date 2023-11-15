@@ -1,4 +1,21 @@
 @charset "UTF-8";
+/*
+0 - 600px => phone
+600 - 900px => table portrait
+900 - 1200px => table landcape
+[1200 - 1800px] + => normal styles apply because it is a desktop first app
+1800px - + => big desktop
+
+$breakpoint:
+- phone
+- tab-port
+- tab-land
+- big-desktop
+
+ORDER: Base + typography -> general layout + grid -> page layout -> components 
+
+1em = 16px;
+*/
 /* Create an animation to move in from left */
 @keyframes moveInLeft {
   /* inital state */
@@ -67,7 +84,25 @@ html {
     Defines what 1rem is so no need to move it to typography
     as it is a generic setting
     */
-  font-size: 62.5%; }
+  font-size: 62.5%;
+  /** 
+    This one is deactivated because
+    it is covered by tab-port
+    */
+  /* ORDER HAS TO BE RESPECTED :
+    if desktop first then ALWAYS THE LARGE BEFORE THE SMALLER */ }
+  @media (max-width: 75em) {
+    html {
+      font-size: 56.25%; } }
+  @media (max-width: 56.25em) {
+    html {
+      font-size: 50%; } }
+  @media (max-width: 37.5em) {
+    html {
+      font-size: 30%; } }
+  @media (min-width: 112.5em) {
+    html {
+      font-size: 75%; } }
 
 body {
   /* box-sizing: border-box: explanations 
@@ -90,7 +125,11 @@ body {
     122 (actual width) = 100 (content) + 20 (both side padding) + 2 (both side border)
     
     */
-  box-sizing: border-box; }
+  box-sizing: border-box;
+  padding: 3rem; }
+  @media (max-width: 56.25em) {
+    body {
+      padding: 0; } }
 
 body {
   /* Best practice: always anyting related to fonts in body */
@@ -99,8 +138,7 @@ body {
   /* font-size: 16px; */
   /* x1.7 bigger the normal line height */
   line-height: 1.7;
-  color: #777;
-  padding: 3rem; }
+  color: #777; }
 
 .header-primary {
   color: #fff;
@@ -124,6 +162,10 @@ body {
     animation-timing-function: ease-out;
     /* animation-iteration-count: 3; */
     /* animation-delay: 3s; */ }
+    @media (max-width: 37.5em) {
+      .header-primary--main {
+        letter-spacing: 1rem;
+        font-size: 5rem; } }
   .header-primary--sub {
     display: block;
     font-size: 2rem;
@@ -133,6 +175,10 @@ body {
     animation-duration: 1s;
     /* function to describe how the animation will progress */
     animation-timing-function: ease-in; }
+    @media (max-width: 37.5em) {
+      .header-primary--sub {
+        letter-spacing: .5rem;
+        font-size: 5rem; } }
 
 .header-secondary {
   font-size: 3.5rem;
@@ -149,6 +195,12 @@ body {
   color: transparent;
   letter-spacing: .2rem;
   transition: all .2s; }
+  @media (max-width: 56.25em) {
+    .header-secondary {
+      font-size: 3rem; } }
+  @media (max-width: 37.5em) {
+    .header-secondary {
+      font-size: 2.5rem; } }
   .header-secondary:hover {
     transform: skewY(2deg) skewX(15deg) scale(1.1);
     /* offset-x | offset-y | blur-radius | color */
@@ -319,6 +371,16 @@ body {
         * before the parent element appears
         */
     animation-fill-mode: backwards; }
+
+.btn--animated {
+  /* shortened version animation the element */
+  animation: moveInBottom .5s ease-out .75s;
+  /* for practicality, instead of putting the animation on the parent .btn element
+    * we can specify it here with animation-fill-mode: backwards
+    * which forces the browser to execute the animation first 
+    * before the parent element appears
+    */
+  animation-fill-mode: backwards; }
 
 .btn-text:link, .btn-text:visited {
   font-size: 1.6rem;
@@ -593,7 +655,7 @@ body {
     -webkit-clip-path: circle(50% at 50% 50%);
     clip-path: circle(50% at 50% 50%);
     transform: translateX(-3rem) skewX(12deg); }
-  .story__img {
+  .story__image {
     height: 100%;
     transform: translateX(-4rem) scale(1.4);
     backface-visibility: hidden;
@@ -623,9 +685,15 @@ body {
   background-color: #333;
   padding: 10rem 0;
   font-size: 1.4rem; }
+  @media (max-width: 56.25em) {
+    .footer {
+      padding: 8rem 0; } }
   .footer__logo-box {
     text-align: center;
     margin-bottom: 8rem; }
+    @media (max-width: 56.25em) {
+      .footer__logo-box {
+        margin-bottom: 6rem; } }
   .footer__logo {
     width: 15rem;
     height: auto; }
@@ -633,6 +701,10 @@ body {
     border-top: 1px solid #eee;
     padding-top: 2rem;
     display: inline-block; }
+    @media (max-width: 56.25em) {
+      .footer__navigation {
+        width: 100%;
+        text-align: center; } }
   .footer__list {
     list-style: none; }
   .footer__item {
@@ -657,6 +729,10 @@ body {
     display: inline-block;
     width: 80%;
     float: right; }
+    @media (max-width: 56.25em) {
+      .footer__copyright {
+        width: 100%;
+        float: none; } }
 
 .row {
   /*
@@ -672,8 +748,15 @@ body {
     the L/R margins
     */
   margin: 0 auto; }
+  @media (max-width: 56.25em) {
+    .row {
+      max-width: 50rem;
+      padding: 0 3rem; } }
   .row:not(:last-child) {
     margin-bottom: 8rem; }
+    @media (max-width: 56.25em) {
+      .row:not(:last-child) {
+        margin-bottom: 6rem; } }
   .row::after {
     content: "";
     display: table;
@@ -682,6 +765,13 @@ body {
     float: left; }
     .row [class^="col-"]:not(:last-child) {
       margin-right: 6rem; }
+      @media (max-width: 56.25em) {
+        .row [class^="col-"]:not(:last-child) {
+          margin-right: 0;
+          margin-bottom: 6rem; } }
+    @media (max-width: 56.25em) {
+      .row [class^="col-"] {
+        width: 100% !important; } }
   .row .col-1-of-2 {
     width: calc((100% - 6rem) / 2); }
   .row .col-1-of-3 {
@@ -714,8 +804,12 @@ body {
             3rd -> bottom right: x y,
             4th -> bottm left x y 
         */
-  -webkit-clip-path: polygon(0 0, 100% 0, 100% 75%, 0 100%);
-  clip-path: polygon(0 0, 100% 0, 100% 75%, 0 100%); }
+  -webkit-clip-path: polygon(0 0, 100% 0, 100% 75vh, 0 100%);
+  clip-path: polygon(0 0, 100% 0, 100% 75vh, 0 100%); }
+  @media (max-width: 37.5em) {
+    .header {
+      -webkit-clip-path: polygon(0 0, 100% 0, 100% 85vh, 0 100%);
+      clip-path: polygon(0 0, 100% 0, 100% 85vh, 0 100%); } }
   .header__logo-box {
     position: absolute;
     top: 4rem;
@@ -738,6 +832,75 @@ body {
     transform: translate(-50%, -50%);
     text-align: center; }
 
+.popup {
+  position: fixed;
+  top: 0rem;
+  left: 0rem;
+  width: 100%;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.8);
+  z-index: 9999;
+  opacity: 0;
+  visibility: hidden;
+  transition: all .3s; }
+  .popup__content {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: #fff;
+    width: 75%;
+    /* show shadow box offset-x | offset-y | blur-radius | color */
+    box-shadow: 0 1rem 2rem rgba(0, 0, 0, 0.2);
+    border-radius: 3px;
+    display: table;
+    overflow: hidden;
+    opacity: 0;
+    transform: translate(-50%, -50%) scale(0.1);
+    transition: all .5s .2s; }
+  .popup__left {
+    width: 33.3333333%;
+    display: table-cell;
+    vertical-align: middle; }
+  .popup__right {
+    width: 66.6666666%;
+    display: table-cell;
+    vertical-align: middle;
+    padding: 3rem 5rem; }
+  .popup__image {
+    display: block;
+    width: 100%; }
+  .popup__text {
+    font-size: 1.4rem;
+    -moz-column-count: 2;
+    column-count: 2;
+    -moz-column-gap: 4rem;
+    column-gap: 4rem;
+    -moz-column-rule: 1px solid #eee;
+    column-rule: 1px solid #eee;
+    -moz-hyphens: auto;
+    -ms-hyphens: auto;
+    -webkit-hyphens: auto;
+    hyphens: auto; }
+  .popup:target {
+    opacity: 1;
+    visibility: visible; }
+  .popup:target .popup__content {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1); }
+  .popup__close:link, .popup__close:visited {
+    position: absolute;
+    top: 2.5rem;
+    right: 2.5rem;
+    margin-right: .5rem;
+    color: #777;
+    display: inline-block;
+    text-decoration: none;
+    font-size: 3rem;
+    line-height: 1; }
+  .popup__close:hover {
+    color: #55c57a; }
+
 .navigation__checkbox {
   display: none; }
 
@@ -754,6 +917,14 @@ body {
   /* show shadow box offset-x | offset-y | blur-radius | color */
   box-shadow: 0 1rem 2rem rgba(0, 0, 0, 0.1);
   text-align: center; }
+  @media (max-width: 56.25em) {
+    .navigation__button {
+      top: 4rem;
+      right: 4rem; } }
+  @media (max-width: 37.5em) {
+    .navigation__button {
+      top: 3rem;
+      right: 3rem; } }
 
 .navigation__background {
   height: 6rem;
@@ -765,6 +936,14 @@ body {
   background-image: radial-gradient(#7ed56f, #28b485);
   z-index: 1000;
   transition: transform 0.8s cubic-bezier(0.86, 0, 0.07, 1); }
+  @media (max-width: 56.25em) {
+    .navigation__background {
+      top: 4.5rem;
+      right: 4.5rem; } }
+  @media (max-width: 37.5em) {
+    .navigation__background {
+      top: 3.5rem;
+      right: 3.5rem; } }
 
 .navigation__nav {
   height: 100vh;
