@@ -12,6 +12,16 @@
     // Make the story box tilted/skewed
     transform: skewX(-12deg);
 
+    @include respond(tab-port){
+        width: 100%;
+        padding: 4rem;
+        padding-left: 7rem; // add more padding to image shape
+    }
+
+    @include respond(phone){
+        transform: skewX(0);
+    }
+
     // Unskew all child elements
     // ==> skewX(12deg) is repeated because of CSS limitation
     // where parent .story class has transform then takes precedence
@@ -43,6 +53,13 @@
         // where parent .story class has transform then takes precedence
         // we have to repeat it to unskew
         transform: translateX(-3rem) skewX(12deg);
+
+
+        @include respond(phone){
+            width: 10rem;
+            height: 10rem;
+            transform: translateX(-3rem) skewX(0);
+        }
     }
 
     &__image {
@@ -61,6 +78,10 @@
         // where parent .story class has transform then takes precedence
         // we have to repeat it to unskew
         transform: skewX(12deg);
+        
+        @include respond(phone){
+            transform: skewX(0deg);
+        }
     }
 
     &__caption{
