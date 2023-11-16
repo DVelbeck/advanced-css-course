@@ -20,6 +20,7 @@
 
     @include respond(phone){
         transform: skewX(0);
+        font-size: $large-font-size;
     }
 
     // Unskew all child elements
@@ -55,9 +56,14 @@
         transform: translateX(-3rem) skewX(12deg);
 
 
-        @include respond(phone){
+        @include respond(tab){
             width: 10rem;
             height: 10rem;
+            transform: translateX(-3rem) skewX(0);
+        }
+        @include respond(phone){
+            width: 7rem;
+            height: 7rem;
             transform: translateX(-3rem) skewX(0);
         }
     }
