@@ -78,9 +78,7 @@
     }
 }
 
-.book{
-    
-
+.book {
     background-image: linear-gradient(105deg,
             /* At 0% of the width => from the left we want white */
             rgba($colour-white, .9) 0%,
@@ -91,14 +89,47 @@
              */
             transparent 50%),
         url(../img/nat-10.jpg);
+
     background-size: 100%;
 
-    height: 50rem;
     border-radius: $base-border-radius;
+
     @include long_box_shadow(.2);
 
-    &__form{
+    @include respond(tab-land) {
+        background-image: linear-gradient(105deg,
+                /* At 0% of the width => from the left we want white */
+                rgba($colour-white, .9) 0%,
+                /* At 65% of the width => from the left we want white again */
+                rgba($colour-white, .9) 65%,
+                /* At 65% of the width => from the left we want transparent
+                which creates a clipping, that is also diagonal due to the 105 deg
+             */
+                transparent 65%),
+            url(../img/nat-10.jpg);
+
+        background-size: cover;
+    }
+
+    @include respond(tab-port) {
+        background-image: linear-gradient(to right,
+                /* At 0% of the width => from the left we want white */
+                rgba($colour-white, .9) 0%,
+                /* At 50% of the width => from the left we want white again */
+                rgba($colour-white, .9) 100%),
+            url(../img/nat-10.jpg);
+    }
+
+    &__form {
         width: 50%;
         padding: 6rem;
+
+        @include respond(tab-land) {
+            width: 65%;
+        }
+        
+        @include respond(tab-port) {
+            width: 100%;
+        }
     }
 }

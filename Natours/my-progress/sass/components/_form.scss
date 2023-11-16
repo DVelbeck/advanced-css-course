@@ -2,6 +2,11 @@
     &__group {
         margin-bottom: 2rem;
     }
+    @include respond(tab-port){
+        &__group:is(:last-child){
+            text-align: center;
+        }
+    }
 
     &__input {
         font-size: 1.5rem;
@@ -43,6 +48,10 @@
             // When required input is invalid and is selected
             border-bottom: 3px solid $colour-secondary-dark;
         }
+
+        @include respond(tab-port){
+            width: 100%; // per line
+        }
     }
 
     &__label {
@@ -70,6 +79,11 @@
     &__radio-group{
         width: 49%; // make the radio sit side by side
         display: inline-block;
+
+        @include respond(tab-port){
+            width: 100%; // per line
+            margin-bottom: 2rem;
+        }
     }
 
     &__radio-input {
