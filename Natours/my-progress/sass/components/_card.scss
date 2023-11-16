@@ -215,4 +215,66 @@
         font-size: 6rem;
         font-weight: 100;
     }
+
+    // SPECIFIC TABLET PORTRAIT CONFIG
+
+    @include respond(tab-port) {
+        // overwrites some properties above if tablet portrait mode
+        // to have cards with dedicated shape and effects
+
+
+        height: auto;
+        border-radius: $base-border-radius;
+        background-color: $colour-white;
+    
+        @include long_box_shadow();
+
+        &__side {
+            height: auto;
+            position: relative;
+            // Avoid the picture overflow parent
+            overflow: hidden;
+            box-shadow: none;
+
+
+            &--back {
+                // make the card rotate on the vertical axis
+                // on 180 degrees at start
+                transform: rotateY(0);
+
+
+                // add clip path as image
+                -webkit-clip-path: polygon(0 15%, 100% 0, 100% 100%, 0% 100%);
+                clip-path: polygon(0 15%, 100% 0, 100% 100%, 0% 100%);
+            }
+        }
+
+        &:hover &__side--front {
+            // make the card rotate on the vertical axis
+            // on 180 degrees
+            transform: rotateY(0);
+        }
+
+        &__details{
+            padding: 1rem 3rem;;
+        }
+
+        // BACK SIDE STYLING
+        &__cta {
+            position: relative;
+            top: 0;
+            left: 0; 
+            transform: translate(0);
+            width: 100%;
+            padding: 7rem 4rem 4rem 4rem;
+        }
+
+        &__price-box {
+            margin-bottom: 3rem;
+        }
+
+        &__price-value {
+            font-size: 4rem;
+        }
+    }
 }

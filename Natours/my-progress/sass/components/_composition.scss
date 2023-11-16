@@ -8,6 +8,17 @@
         z-index: 10;
         transition: all .2s;
 
+
+
+        @include respond(tab-port){
+            // specically display images side by side 
+            //  for tablet portrait mode
+            float: left;
+            position: relative;
+            width: 33.333333333%;
+            @include long_box_shadow(.2);
+        }
+
         // Add a space between the border 
         // and the element that has the border
         // here it is the images hover below
@@ -16,16 +27,33 @@
         &--p1 {
             left: 0;
             top: -2rem; // move upwards
+
+
+            @include respond(tab-port){
+                top: 0;
+                transform: scale(1.2);
+            }
         }
 
         &--p2 {
             right: 0;
             top: 2rem; // move upwards
+
+            @include respond(tab-port){
+                top: -1rem;
+                transform: scale(1.3);
+                z-index: 100;
+            }
         }
 
         &--p3 {
             left: 20%;
             top: 10rem; // move upwards
+            @include respond(tab-port){
+                top: 1rem;
+                left: 0;
+                transform: scale(1.1);
+            }
         }
 
         &:hover {

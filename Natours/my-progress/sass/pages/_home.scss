@@ -3,7 +3,12 @@
     padding: 25rem 0; //25rem top and bottom
 
     // remove space from the header so move the main up
-    margin-top: -25vh;
+    margin-top: -20vh;
+
+    @include respond(tab-port){
+        padding: 20rem 0; //20rem top and bottom
+    }
+
 }
 
 .section-features {
@@ -33,18 +38,31 @@
     }
 
     margin-top: -10rem;
+
+    @include respond(tab-port){
+        padding: 10rem 0; //15rem top and bottom
+    }
+
 }
 
 .section-tours {
     background-color: $colour-grey-light-1;
-    padding: 25rem 0 50rem 0;
+    padding: 25rem 0 15rem 0;
     margin-top: -10rem;
+
+    @include respond(tab-port){
+        padding: 20rem 0 10rem 0; 
+    }
 }
 
 .section-stories{
     position: relative;
     padding: 15rem 0;
     // background-color: $colour-grey-light-1;
+
+    @include respond(tab-port){
+        padding: 10rem 0; 
+    }
 }
 
 .section-book{
@@ -54,6 +72,10 @@
         $colour-primary-light, 
         $colour-primary-dark
     );
+    
+    @include respond(tab-port){
+        padding: 10rem 0; 
+    }
 }
 
 .book{
