@@ -39,14 +39,10 @@
         position: relative;
         overflow: hidden;
 
-        // Make the content that is around to flow around as a circle
-        // radius at center x and y of the shape 
-        -webkit-shape-outside: circle(50% at 50% 50%);
-        shape-outside: circle(50% at 50% 50%);
+        // Fix for when clip-path is not supported by older browsers
+        border-radius: 50%;
 
-        // modify the shape to be like a circle
-        -webkit-clip-path:circle(50% at 50% 50%);
-        clip-path: circle(50% at 50% 50%);
+
 
         // move the text to the right
         // it is better to use transform than margin due to float
@@ -54,6 +50,24 @@
         // where parent .story class has transform then takes precedence
         // we have to repeat it to unskew
         transform: translateX(-3rem) skewX(12deg);
+
+        @supports(-webkit-clip-path: circle(50% at 50% 50%)) or (clip-path: circle(50% at 50% 50%)){
+            // modify the shape to be like a circle
+            // originally part out of this feature query before section 6
+            -webkit-clip-path:circle(50% at 50% 50%);
+            clip-path: circle(50% at 50% 50%);
+
+
+            // Make the content that is around to flow around as a circle
+            // radius at center x and y of the shape 
+
+            // originally part out of this feature query before section 6
+            -webkit-shape-outside: circle(50% at 50% 50%);
+            shape-outside: circle(50% at 50% 50%);
+
+            // Fix the text not flowing around when clip path is supported
+            border-radius: none;
+        }
 
 
         @include respond(tab){

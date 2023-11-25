@@ -20,7 +20,12 @@
 
         /* fix the collapsing of the block due to position: absolute*/
         width: 100%;
-        backface-visibility: hidden;
+
+        @supports(-webkit-backface-visibility: hidden) or (backface-visibility: hidden){
+            // Always put prefixed property version first (here for safari)
+            -webkit-backface-visibility: hidden;
+            backface-visibility: hidden;
+        }
         /**/
 
         border-radius: $base-border-radius;
@@ -80,9 +85,10 @@
 
         // New CSS property not compatible with IE, Edge
         background-blend-mode: screen;
-
-        -webkit-clip-path: polygon(0 0, 100% 0, 100% 85%, 0 100%);
-        clip-path: polygon(0 0, 100% 0, 100% 85%, 0 100%);
+        @supports(-webkit-clip-path: polygon(0 0)) or (clip-path: polygon(0 0)){
+            -webkit-clip-path: polygon(0 0, 100% 0, 100% 85%, 0 100%);
+            clip-path: polygon(0 0, 100% 0, 100% 85%, 0 100%);
+        }
 
         // fix the radius corners broken due to clip-path 
         // that overides the overflow from &__side 
@@ -242,10 +248,11 @@
                 // on 180 degrees at start
                 transform: rotateY(0);
 
-
-                // add clip path as image
-                -webkit-clip-path: polygon(0 15%, 100% 0, 100% 100%, 0% 100%);
-                clip-path: polygon(0 15%, 100% 0, 100% 100%, 0% 100%);
+                @supports(-webkit-clip-path: polygon(0 15%)) or (clip-path: polygon(0 15%)) {
+                    // add clip path as image
+                    -webkit-clip-path: polygon(0 15%, 100% 0, 100% 100%, 0% 100%);
+                    clip-path: polygon(0 15%, 100% 0, 100% 100%, 0% 100%);
+                }
             }
         }
 

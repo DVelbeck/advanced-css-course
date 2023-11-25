@@ -36,7 +36,11 @@
 
 @mixin elementGradient{
     @include mainBackgroundGradient;
-    -webkit-background-clip: text;
+
+    @supports(-webkit-background-clip: text) or (background-clip: text){
+        -webkit-background-clip: text;
+        background-clip: text;
+    }
     color: transparent;
 }
 

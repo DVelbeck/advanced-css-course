@@ -13,6 +13,17 @@
 
     transition: all .3s;
 
+    // Feature query to tests if browser supports one of the 2 css properties
+    // MUST HAVE VALUE LIKE blur(10px) INCLUDED
+    @supports(-webkit-backdrop-filter: blur(10px)) or (backdrop-filter: blur(10px)){
+        // then apply the desired css properties
+
+        // Always put prefixed property version first (here for safari)
+        -webkit-backdrop-filter: blur(10px); // for safari
+        // then the generic property
+        backdrop-filter: blur(10px);
+        background-color: rgba($colour-black, .3);
+    }
 
     &__content {
         // make it right at the center of its container

@@ -185,16 +185,18 @@ body {
   text-transform: uppercase;
   font-weight: 700;
   display: inline-block;
-  -webkit-background-clip: text;
   color: transparent;
   letter-spacing: .2rem;
   transition: all .2s;
-  /* These 3 CSS declarations below are later replace by elementGradient mixin */
+  /* These 3 CSS declarations below are later replaced by elementGradient mixin */
   background-image: linear-gradient(to right, rgba(126, 213, 111, 0.8), rgba(40, 180, 133, 0.8));
-  -webkit-background-clip: text;
   color: transparent;
   letter-spacing: .2rem;
   transition: all .2s; }
+  @supports (-webkit-background-clip: text) or (background-clip: text) {
+    .header-secondary {
+      -webkit-background-clip: text;
+      background-clip: text; } }
   @media (max-width: 56.25em) {
     .header-secondary {
       font-size: 3rem; } }
@@ -423,12 +425,15 @@ body {
     left: 0;
     /* fix the collapsing of the block due to position: absolute*/
     width: 100%;
-    backface-visibility: hidden;
     /**/
     border-radius: 3px;
     /* show shadow box offset-x | offset-y | blur-radius | color */
     box-shadow: 0 1.5rem 4rem rgba(0, 0, 0, 0.15);
     overflow: hidden; }
+    @supports (-webkit-backface-visibility: hidden) or (backface-visibility: hidden) {
+      .card__side {
+        -webkit-backface-visibility: hidden;
+        backface-visibility: hidden; } }
     .card__side--front {
       background-color: #fff; }
     .card__side--back {
@@ -449,10 +454,12 @@ body {
     background-size: cover;
     height: 23rem;
     background-blend-mode: screen;
-    -webkit-clip-path: polygon(0 0, 100% 0, 100% 85%, 0 100%);
-    clip-path: polygon(0 0, 100% 0, 100% 85%, 0 100%);
     border-top-left-radius: 3px;
     border-top-right-radius: 3px; }
+    @supports (-webkit-clip-path: polygon(0 0)) or (clip-path: polygon(0 0)) {
+      .card__picture {
+        -webkit-clip-path: polygon(0 0, 100% 0, 100% 85%, 0 100%);
+        clip-path: polygon(0 0, 100% 0, 100% 85%, 0 100%); } }
     .card__picture--1 {
       background-image: linear-gradient(to right bottom, #ffb900, #ff7730), url("../img/nat-5.jpg"); }
     .card__picture--2 {
@@ -521,9 +528,11 @@ body {
         overflow: hidden;
         box-shadow: none; }
         .card__side--back {
-          transform: rotateY(0);
-          -webkit-clip-path: polygon(0 15%, 100% 0, 100% 100%, 0% 100%);
-          clip-path: polygon(0 15%, 100% 0, 100% 100%, 0% 100%); }
+          transform: rotateY(0); }
+          @supports (-webkit-clip-path: polygon(0 15%)) or (clip-path: polygon(0 15%)) {
+            .card__side--back {
+              -webkit-clip-path: polygon(0 15%, 100% 0, 100% 100%, 0% 100%);
+              clip-path: polygon(0 15%, 100% 0, 100% 100%, 0% 100%); } }
       .card:hover .card__side--front {
         transform: rotateY(0); }
       .card__details {
@@ -606,11 +615,13 @@ body {
     font-size: 6rem;
     margin-bottom: .5rem;
     display: inline-block;
-    -webkit-background-clip: text;
     color: transparent;
     background-image: linear-gradient(to right, rgba(126, 213, 111, 0.8), rgba(40, 180, 133, 0.8));
-    -webkit-background-clip: text;
     color: transparent; }
+    @supports (-webkit-background-clip: text) or (background-clip: text) {
+      .feature-box__icon {
+        -webkit-background-clip: text;
+        background-clip: text; } }
     @media (max-width: 56.25em) {
       .feature-box__icon {
         margin-bottom: 0; } }
@@ -733,11 +744,15 @@ body {
     float: left;
     position: relative;
     overflow: hidden;
-    -webkit-shape-outside: circle(50% at 50% 50%);
-    shape-outside: circle(50% at 50% 50%);
-    -webkit-clip-path: circle(50% at 50% 50%);
-    clip-path: circle(50% at 50% 50%);
+    border-radius: 50%;
     transform: translateX(-3rem) skewX(12deg); }
+    @supports (-webkit-clip-path: circle(50% at 50% 50%)) or (clip-path: circle(50% at 50% 50%)) {
+      .story__shape {
+        -webkit-clip-path: circle(50% at 50% 50%);
+        clip-path: circle(50% at 50% 50%);
+        -webkit-shape-outside: circle(50% at 50% 50%);
+        shape-outside: circle(50% at 50% 50%);
+        border-radius: none; } }
     @media (max-width: 37.5em) {
       .story__shape {
         width: 7rem;
@@ -877,8 +892,8 @@ body {
     width: calc(3 * ((100% - 3 * 6rem) / 4) + 2 * 6rem); }
 
 .header {
-  /* 95% of the viewport height */
-  height: 95vh;
+  /* 85vh = 85% of the viewport height, originally 95vh before Section 6 */
+  height: 85vh;
   /* property values precedences are from left (1st) to right (last)
         * linear-gradient will be then on top of image
          */
@@ -887,7 +902,10 @@ body {
   background-size: cover;
   background-position: top;
   position: relative;
-  /* Handle the display of elegant white cut in the header image 
+  /** Apple Retina screen dot per inch resolution as reference */ }
+  @supports (-webkit-clip-path: polygon(0 0)) or (clip-path: polygon(0 0)) {
+    .header {
+      /* Handle the display of elegant white cut in the header image 
             by moving the points locations of the header box corners
             takes coordinates: 
             1st -> top left: x y, 
@@ -895,8 +913,12 @@ body {
             3rd -> bottom right: x y,
             4th -> bottm left x y 
         */
-  -webkit-clip-path: polygon(0 0, 100% 0, 100% 75vh, 0 100%);
-  clip-path: polygon(0 0, 100% 0, 100% 75vh, 0 100%); }
+      -webkit-clip-path: polygon(0 0, 100% 0, 100% 75vh, 0 100%);
+      clip-path: polygon(0 0, 100% 0, 100% 75vh, 0 100%);
+      height: 95vh; } }
+  @media (min-resolution: 192dpi) and (min-width: 37.5em), (-webkit-min-device-pixel-ratio: 2x) and (min-width: 37.5em), (min-width: 125em) {
+    .header {
+      background-image: linear-gradient(to right bottom, rgba(126, 213, 111, 0.8), rgba(40, 180, 133, 0.8)), url(../img/hero.jpg); } }
   @media (max-width: 37.5em) {
     .header {
       -webkit-clip-path: polygon(0 0, 100% 0, 100% 85vh, 0 100%);
@@ -934,6 +956,11 @@ body {
   opacity: 0;
   visibility: hidden;
   transition: all .3s; }
+  @supports (-webkit-backdrop-filter: blur(10px)) or (backdrop-filter: blur(10px)) {
+    .popup {
+      -webkit-backdrop-filter: blur(10px);
+      backdrop-filter: blur(10px);
+      background-color: rgba(0, 0, 0, 0.3); } }
   .popup__content {
     position: absolute;
     top: 50%;

@@ -68,12 +68,11 @@ body {
     text-transform: uppercase;
     font-weight: 700;
     display: inline-block;
-    -webkit-background-clip: text; 
     color: transparent;
     letter-spacing: .2rem;
     transition: all .2s;
 
-    /* These 3 CSS declarations below are later replace by elementGradient mixin */
+    /* These 3 CSS declarations below are later replaced by elementGradient mixin */
 
     // background-image: linear-gradient(to right, $colour-primary-light, $colour-primary-dark);
 
