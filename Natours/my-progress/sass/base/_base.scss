@@ -84,4 +84,10 @@ body {
     @include respond(tab-port){ // width < 900 ?
         padding: 0;
     }
+
+    // Define the selection pseduo-element (i.e when user select texts in page)
+    ::selection {
+        background-color: $colour-primary;
+        color: $colour-white;
+    }
 }

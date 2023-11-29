@@ -224,9 +224,12 @@
 
     // SPECIFIC TABLET PORTRAIT CONFIG
 
-    @include respond(tab-port) {
-        // overwrites some properties above if tablet portrait mode
+    // overwrites some properties above if tablet portrait mode
         // to have cards with dedicated shape and effects
+    @media only screen and (max-width: 56.25em),
+        // And when the device cannot hover like tables
+        only screen and (hover: none) {
+        
 
 
         height: auto;

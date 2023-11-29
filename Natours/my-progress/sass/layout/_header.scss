@@ -34,9 +34,9 @@
     /** Apple Retina screen dot per inch resolution as reference */
     // If the resolution is higher than 192dpi and if device (like a phone) width larger than 37.5em (600px)
     // OR (using ,) device (like a desktop) width is larger than 125em (2000px)
-    @media (min-resolution: 192dpi) and (min-width: 37.5em),
-        (-webkit-min-device-pixel-ratio: 2x) and (min-width: 37.5em), // specific for safari
-        (min-width: 125em) {
+    @media only screen and (min-resolution: 192dpi) and (min-width: 37.5em),
+        only screen and (-webkit-min-device-pixel-ratio: 2x) and (min-width: 37.5em), // specific for safari
+        only screen and (min-width: 125em) {
         background-image: linear-gradient(to right bottom,
             rgba($colour-primary-light, 0.8),
             rgba($colour-primary-dark, 0.8)),
