@@ -1,0 +1,186 @@
+///////////////////////////////////////////
+// LOGO
+.logo {
+    height: 3.25em;
+    margin-left: 2rem;
+}
+
+///////////////////////////////////////////
+// SEARCH 
+.search {
+    // background-color: orangered;
+    flex: 0 0 40%;
+
+
+    display: flex;
+    // make the child elements centered
+    justify-content: center;
+    align-items: center;
+
+    &__input {
+        // Remember inputs don't inherit automatically
+        // the font-family / font-size / color
+        // of the global html properties 
+        // ==> have to set these to 'inherit'
+
+        font-family: inherit;
+        font-size: inherit;
+        color: inherit;
+        background-color: var(--colour-grey-light-2);
+        border: none;
+        padding: .7rem 2rem;
+        border-radius: 100px;
+        width: 90%;
+
+        transition: all .2s;
+
+        // make the button move to the left on top of the input
+        margin-right: -3.25rem;
+
+        &:focus {
+            outline: none;
+            width: 100%;
+            background-color: var(--colour-grey-light-3);
+        }
+
+        // Only works in Chrome / safari
+        &::-webkit-input-placeholder {
+            font-weight: 100;
+            color: var(--colour-grey-dark-3);
+        }
+    }
+
+    &__input:focus+&__button {
+        background-color: var(--colour-grey-light-3);
+    }
+
+    &__button {
+        border: none;
+        background-color: var(--colour-grey-light-2);
+
+        &:focus {
+            outline: none;
+            background-color: var(--colour-grey-light-3);
+        }
+
+        :active {
+            transform: translateY(2px);
+        }
+    }
+
+    &__icon {
+        height: 2rem;
+        width: 2rem;
+        // add colour to SVG icons
+        fill: var(--colour-grey-dark-3);
+    }
+}
+
+
+
+///////////////////////////////////////////
+// USER NAVIGATION 
+.user-nav {
+
+    background-color: greenyellow;
+    // make the user-nav use the entire height of its parent
+    align-self: stretch;
+
+    display: flex;
+    align-items: center;
+
+    // Select all 1st level children
+    & > * {
+        display: flex;
+        padding: 0 2rem;
+        cursor: pointer;
+
+        // make all 1st level children stretch vertically
+        align-self: stretch;
+
+        // Make all 1st level children vertically centered
+        display: flex;
+        align-items: center;
+    }
+
+    // do not add a space between * and :hover
+    // otherwise it adds the over to the sub children
+    // rather than  all 1st level children!!!!
+    & > *:hover {
+        background-color: var(--colour-grey-light-2);
+    }
+
+    &__icon-box {
+        position: relative;
+    }
+
+    // Select all children but last
+    &:not(:last-child) {
+        margin-right: 2rem;
+    }
+
+    &__icon {
+        height: 2.25rem;
+        width: 2.25rem;
+        // add colour to SVG icons
+        fill: var(--colour-grey-dark-2);
+    }
+
+    &__notification {
+        font-size: .8rem;
+        height: 1.75rem;
+        width: 1.75rem;
+        // padding: 1rem;
+        border-radius: 50%;
+        background-color: var(--colour-primary);
+        color: var(--colour-white);
+
+        position: absolute;
+        top: 1.5rem;
+        right: 1.1rem;
+
+        // 4th level of f make the text centered
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    &__user-photo {
+        height: 3.75rem;
+        width: 3.75rem;
+        border-radius: 50%;
+        margin-right: 1rem;
+    }
+
+    &__user-name {}
+}
+
+
+
+///////////////////////////////////////////
+// SIDE NIAVIGATION
+.side-nav {
+    
+    &__item {
+
+    }
+
+    &__link {
+
+    }
+
+    &__icon {
+        height: 1.74rem;
+        width: 1.74rem;
+    }
+}
+
+///////////////////////////////////////////
+// LEGAL TEXT
+.legal {
+    font-size: 1.2rem;
+    color: var(--colour-grey-light-4);
+    text-align: center;
+    padding: 2.5rem;
+
+}

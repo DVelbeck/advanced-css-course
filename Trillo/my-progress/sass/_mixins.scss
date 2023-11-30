@@ -1,0 +1,124 @@
+@mixin box_shadow(
+    $x-direction: .2rem, 
+    $y-direction: .15rem, 
+    $blur-radius: .2rem,
+    $colour: '#fff',
+    $opacity: .2,
+){
+    /* show shadow box offset-x | offset-y | blur-radius | color */
+    box-shadow: $x-direction $y-direction $blur-radius rgba($colour, $opacity);
+}
+
+@mixin base_box_shadow($opacity: .5){
+    @include box_shadow(0, 1rem, 2rem, var(--colour-black), $opacity);
+}
+
+@mixin center_horizontally(){
+    position: absolute;
+    top:50%;
+    left:50%;
+    transform: translate(-50%, -50%);
+}
+
+@mixin long_box_shadow($opacity: .15){
+    @include box_shadow(0, 1.5rem, 4rem, var(--colour-black), $opacity);
+}
+
+@mixin clearfix {
+    // avoid the row to collapse because of the floating cols
+    &::after{
+        content: "";
+        display: table;
+        // clear any used float: left or float: right
+        clear: both;
+    }
+}
+
+@mixin elementGradient{
+    @include mainBackgroundGradient;
+
+    @supports(-webkit-background-clip: text) or (background-clip: text){
+        -webkit-background-clip: text;
+        background-clip: text;
+    }
+    color: transparent;
+}
+
+@mixin mainBackgroundGradient {
+    @include imageGradient(
+        var(--colour-primary-light), 
+        var(--colour-primary-dark),
+        0.8,
+        to right
+    );
+}
+
+@mixin imageGradient($startColour, $endColour, $opacity:1, $direction: to right bottom) {
+    background-image: linear-gradient(
+        $direction,
+        rgba($startColour, $opacity),
+        rgba($endColour, $opacity)
+    );
+}
+
+@mixin imageGradientWithURL($startColour, $endColour, $opacity:1, $url: '', $direction: to right bottom) {
+    background-image: linear-gradient(
+        $direction,
+        rgba($startColour, $opacity),
+        rgba($endColour, $opacity),
+    ), url($url);
+}
+
+// MEDIA QUERY MANAGER
+/*
+0 - 600px => phone
+600 - 900px => table portrait
+900 - 1200px => table landcape
+[1200 - 1800px] + => normal styles apply because it is a desktop first app
+1800px - + => big desktop
+
+$breakpoint:
+- phone
+- tab-port
+- tab-land
+- big-desktop
+
+ORDER: Base + typography -> general layout + grid -> page layout -> components 
+
+1em = 16px;
+*/
+@mixin respond($breakpoint){
+    // It is best practice with media queries
+    // to add which device it is for first
+    // i.e ' only screen ' to only apply to screens
+    // then add the condition with ' and '
+    @if $breakpoint == phone {
+        // 600px / 16 = 37.5em
+        @media only screen and (max-width: 37.5em){
+            // content directive to get the content passed into the mixin
+            @content
+        };
+    }
+    @if $breakpoint == tab-port {
+        // 900px / 16 = 56.25em
+        @media only screen and (max-width: 56.25em){
+            // content directive to get the content passed into the mixin
+            @content
+        };
+    }
+    @if $breakpoint == tab-land {
+        // 1200px / 16 = 75em
+        @media only screen and (max-width: 75em){
+            // content directive to get the content passed into the mixin
+            @content
+        };
+    }
+    @if $breakpoint == big-desktop {
+        // 1800px / 16 = 112.5em
+        @media only screen and (min-width: 112.5em){
+            // content directive to get the content passed into the mixin
+            @content
+        };
+    }
+    
+}

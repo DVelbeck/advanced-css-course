@@ -1,0 +1,51 @@
+.container {
+    max-width: 120rem;
+    margin: 8rem auto; //center box in middle of page
+    background-color: var(--colour-grey-light-2);
+    box-shadow: var(--shadow-dark);
+
+    min-height: 50rem;
+}
+
+.header {
+    font-size: 1.4rem;
+    height: 7rem;
+    background-color: var(--colour-white);
+    border-bottom: var(--colour-grey-light-2);
+    // Make child elements displayed in a responsive/flexible way
+    display: flex;
+    // Place the child elements nicely spaced
+    justify-content: space-between;
+    // Align them veritcally on center
+    align-items: center;
+}
+
+.content {
+    display: flex;
+}
+
+.sidebar {
+    background-color: var(--colour-grey-dark-1);
+    // Syntax: none | [ <'flex-grow'> <'flex-shrink'>? || <'flex-basis'> ]
+    // flex-grow => how much element could grow if enough space => here 0 = No
+    // flex-shrink => how much element could shrink NOT enough space => here 0 = No
+    // flex-basis => how much basic space it should always occupy => here 18%
+    // even though it will shrink as basis is percentage
+    flex: 0 0 18%;
+
+    // push child elements vertically at sidebar parent extremities
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    ///
+}
+
+.hotel-view {
+    background-color: var(--colour-white);
+
+    // by defining flex: 1 => should grow as much as possible with available space
+    flex: 1; 
+
+    // TEST: TO BE REMOVED
+    height: 80rem;
+}

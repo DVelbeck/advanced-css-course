@@ -1,0 +1,34 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+// Make all elements inherit the box-sizing definition
+// set below in html
+*,
+*::before,
+::after {
+    box-sizing: inherit;
+
+}
+
+html {
+    box-sizing: border-box;
+    font-size: 62.5%; // 1rem = 10px, 10/16px (browser default) = 62.5%
+}
+
+body {
+    // background-color: --colour-primary;
+    font-family: 'Open Sans', sans-serif; // sans-serif if browser fails using Open Sans
+    line-height: 1.6;
+
+    color: var(--colour-grey-dark-2);
+
+    // @include imageGradient(var(--colour-primary-light), var(--colour-primary-dark));
+    background-image: linear-gradient(to right bottom, var(--colour-primary-light), var(--colour-primary-dark));
+    background-size: cover;
+    // remove the repetition of the background
+    background-repeat: no-repeat;
+    
+    min-height: 100vh;
+}
