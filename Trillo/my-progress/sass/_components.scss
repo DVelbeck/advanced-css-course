@@ -160,18 +160,78 @@
 ///////////////////////////////////////////
 // SIDE NIAVIGATION
 .side-nav {
+
+    font-size: 1.4rem;
+    list-style: none;
+    margin-top: 3.5rem;
     
     &__item {
-
+        position: relative;
+        
+        &:not(:last-child){
+            margin-bottom: .5rem;
+        }
     }
 
-    &__link {
+    &__item:before {
+        content: "";
+        position: absolute;
+        top:0;
+        left: 0;
+        height: 100%;
+        width: 3px;
+        background-color: var(--colour-primary);
 
+        // Hide the colouring before hover
+        transform: scaleY(0);
+
+        // define the transition
+        transition: transform .2s,
+                    // define transition to .4s 
+                    // sta
+                    // delayed by .2s
+                    width .4s cubic-bezier(1,0,0,1) .2s
+                    // define the background colour
+                    //click /active
+                    background-color .1s;
+    }
+
+
+    &__item:hover::before,
+    &__item--active::before {
+        // Displayed the colouring of the item on hover
+        transform: scaleY(1);
+        width: 100%;
+    }
+    &__item:active::before {
+        background-color: var(--colour-primary-light);
+    }
+
+    &__link:link, 
+    &__link:visited {
+        color: var(--colour-grey-light-1);
+        text-decoration: none;
+        text-transform: uppercase;
+        // display: block;
+        padding: 1.5rem 3rem;
+
+        // make the text above the ::before pseudo class
+        // NUST HAVE A POSITION RELATIVE
+        position: relative;
+        z-index: 10;
+        
+        // align child elements vertically
+        display: flex;
+        align-items: center;
     }
 
     &__icon {
         height: 1.74rem;
         width: 1.74rem;
+        margin-right: 2rem;
+        // add colour to SVG icons
+        // using colour of parent's colour element
+        fill: currentColor;
     }
 }
 
@@ -183,4 +243,136 @@
     text-align: center;
     padding: 2.5rem;
 
+}
+
+///////////////////////////////////////////
+// GALLERY
+.gallery{
+    display: flex;
+    &__photo{
+        width:100%;
+        // remove space underneath 
+        // when defined as inline elements
+        display: block;
+    }
+}
+
+
+///////////////////////////////////////////
+// OVERVIEW
+.overview{
+    display: flex;
+    // justify-content: ;
+    align-items: center;
+    border-bottom: var(--line);
+
+    &__header{
+        font-size: 2.25rem;
+        font-weight: 300;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        padding: 1.5rem 3rem;
+    }
+
+    &__stars{
+        // make the stars div occupy and grow
+        // just the space it needs plus leave the rest to the margin-right
+        // between header h1 and location div
+        // thanks to "display: flex"
+        //
+        // we could have used "flex: 1" but 
+        // the div would have used the entire space between h1 and location
+        // and on special effects it wouldn't be only on the stars
+        margin-right: auto;
+
+        // to fix the child icon elements will be vertically centered
+        display: flex;
+
+    }
+    &__icon-star, &__icon-location{
+        height: 1.75rem;
+        width: 1.75rem;
+        fill: var(--colour-primary);
+    }
+    &__location{
+        font-size: 1.2rem;
+        vertical-align: center;
+        display: flex;
+        // padding: 1.5rem 3rem;
+    }
+    &__icon-location{
+        margin-right: .5rem;
+    }
+    &__rating{
+        background-color: var(--colour-primary);
+        color: var(--colour-white);
+        padding: .75rem;
+        margin-left: 3rem;
+        padding: 0 2.25rem;
+
+        // make the block occupy and stretch top to bottom
+        align-self: stretch;
+
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+
+    }
+    &__rating-average{
+        font-size: 2.25rem;
+        font-weight: 300;
+        margin-bottom: -3px;
+    }
+    &__rating-count{
+        font-size: .8rem;
+        text-transform: uppercase;
+
+    }
+}
+
+///////////////////////////////////////////
+// BUTTON INLINE
+.btn-inline,
+.btn-inline:link{
+    // text-decoration: underline;
+    font-size: inherit;
+    border: none;
+    background-color: transparent;
+    border-bottom: 1px solid currentColor;
+    color: var(--colour-primary);
+    cursor: pointer;
+
+    transition: all .2s;
+    &:hover{
+        // as btn-inline default bottom bottom is currentColor
+        // by changing the color on hover, 
+        // the border will change too
+        color: var(--colour-grey-dark-2);
+    }
+
+    &:focus{
+        outline: none;
+        // infinite pulsation
+        animation: pulsate 1s infinite;
+    }
+}
+
+// Creates the pultation of the btn-link
+@keyframes pulsate{
+    // no scaling no back-shadow
+    0% {
+        transform: scale(1);
+        box-shadow: none;
+    }
+    //  scaling and back-shadow
+    50% {
+      transform: scale(1.05);
+      box-shadow: 0 1rem 4rem rgba(#000000, .25);
+    }
+    // no scaling no back-shadow again
+    100% {
+        transform: scale(1);
+        box-shadow: none;
+    }
 }

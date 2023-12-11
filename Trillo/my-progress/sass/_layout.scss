@@ -11,7 +11,7 @@
     font-size: 1.4rem;
     height: 7rem;
     background-color: var(--colour-white);
-    border-bottom: var(--colour-grey-light-2);
+    border-bottom: var(--line);
     // Make child elements displayed in a responsive/flexible way
     display: flex;
     // Place the child elements nicely spaced
@@ -45,7 +45,28 @@
 
     // by defining flex: 1 => should grow as much as possible with available space
     flex: 1; 
+}
 
-    // TEST: TO BE REMOVED
-    height: 80rem;
+.details {
+    display: flex;
+    padding: 4.5rem;
+    background-color: var(--colour-grey-light-1);
+    border-bottom: var(--line);
+}
+
+.description {
+    // occupy 60% of the space
+    flex: 0 0 60%;
+    // same as side padding for aesthetic
+    margin-right: 4.5rem;
+
+    padding: 3rem;
+
+    background-color: var(--colour-white);
+    box-shadow: var(--shadow-light);
+}
+
+.user-reviews {
+    // use remaining space
+    flex: 1;
 }
